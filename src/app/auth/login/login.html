@@ -1,0 +1,25 @@
+<form [formGroup]="loginForm">
+
+    <lib-text-field
+      label="Email"
+      type="email"
+      [control]="emailControl"
+      [isRequired]="true">
+    </lib-text-field>
+
+    <lib-text-field 
+        label="Password" 
+        type="password"
+        [control]="passwordControl" 
+        placeholder="Enter password"
+        [isRequired]="true">
+    </lib-text-field>
+
+    <lib-button label="Login" variant="primary" size='md' 
+        type="submit" styleType="filled"
+        [disabled]="loginForm.invalid" (click)="onLogin()">
+    </lib-button>
+    
+</form>
+
+

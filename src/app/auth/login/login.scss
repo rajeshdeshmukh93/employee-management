@@ -1,0 +1,74 @@
+// Variables
+$primary-color: #7c4dff; // Purple from your screenshot
+$border-color: #d1d1d1;
+$label-color: #666;
+$bg-color: #fff;
+$error-color: #d32f2f;
+
+.input-field {
+  position: relative;
+  width: 240px; // Matching your screenshot width
+  margin: 20px 0;
+
+  &__input {
+    width: 100%;
+    padding: 12px 40px 12px 12px; // Space for the icon on the right
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+
+    // --- STATES ---
+    
+    // Focus & Active State
+    &:focus {
+      border-color: $primary-color;
+      border-width: 2px;
+    }
+
+    // Floating Label Logic: When input is focused OR not empty
+    &:focus + .input-field__label,
+    &:not(:placeholder-shown) + .input-field__label {
+      top: 0;
+      left: 10px;
+      font-size: 12px;
+      padding: 0 4px;
+      background-color: $bg-color;
+      color: $primary-color;
+    }
+  }
+
+  &__label {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $label-color;
+    font-size: 14px;
+    pointer-events: none;
+    transition: all 0.2s ease;
+  }
+
+  &__asterisk {
+    color: $error-color;
+    display: none; // Hidden by default
+  }
+
+  &__icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $label-color;
+    display: flex;
+    align-items: center;
+  }
+
+  // --- MODIFIER: Mandatory State ---
+  &.mandatory {
+    .input-field__asterisk {
+      display: inline;
+    }
+  }
+}

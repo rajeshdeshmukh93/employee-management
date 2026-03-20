@@ -1,0 +1,59 @@
+
+<div class="input-wrapper">
+  
+  <div class="input-container" 
+       [class.error]="control.invalid && control.touched"
+       [class.has-value]="control.value">
+    
+    <input
+      *ngIf="type !== 'dropdown'"
+      [type]="type === 'datepicker' ? 'date' : type"
+      placeholder=" " 
+      [formControl]="control"
+      id="input-{{label}}"
+    />
+
+    <select *ngIf="type === 'dropdown'" [formControl]="control">
+      <option value="" disabled selected hidden></option>
+      <option *ngFor="let opt of options" [value]="opt">{{ opt }}</option>
+    </select>
+
+    <label [attr.for]="'input-' + label">
+      {{ label }}
+      <span class="asterisk" *ngIf="isRequired">*</span>
+    </label>
+
+    <span class="icon-suffix">
+      <ng-container [ngSwitch]="type">
+        <svg *ngSwitchCase="'datepicker'" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        
+        <svg *ngSwitchCase="'dropdown'" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </ng-container>
+    </span>
+
+  </div>
+
+  <div class="error-msg" *ngIf="control.invalid && control.touched">
+  <span *ngIf="control.errors?.['required']">{{ label }} is required</span>
+  <span *ngIf="control.errors?.['minlength']">{{ label }} must be at least 6 chars</span>
+  <span *ngIf="control.errors?.['maxlength']">{{ label }} cannot exceed 10 chars</span>
+  <span *ngIf="control.errors?.['email']">Please enter a valid email address</span>
+  <!-- <span *ngIf="control.errors?.['pattern']">Invalid Singapore phone number</span> -->
+  <!-- <span *ngIf="control.errors?.['pattern']">Password must be a minimum of 8 characters</span> -->
+  <ng-container *ngIf="control.errors?.['pattern']">
+      <span *ngIf="label === 'Password'">
+        Min 8 chars, 1 uppercase, 1 lowercase, 1 number
+      </span>
+      <span *ngIf="label === 'Phone Number' || label === 'Phone'">
+        Invalid Singapore phone number
+      </span>
+  </ng-container>
+</div>
+</div>

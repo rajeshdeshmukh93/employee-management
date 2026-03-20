@@ -1,0 +1,278 @@
+
+
+// // Typography Variables from Figma
+// $font-size-main: 16px;       // The '16' in 16/24
+// $line-height-main: 24px;     // The '24' in 16/24
+// $color-text-active: #384048; // Estimated 'Text/active' hex code
+// $font-family: 'Inter', sans-serif; // Standard Figma default, check your specific file
+
+// $primary-color: #7c4dff;
+// $border-color: #d1d1d1;
+// $error-red: #d32f2f;
+
+// .input-wrapper {
+//   position: relative;
+//   margin-bottom: 16px;
+
+//   .input-container {
+//     width: 240px;
+//     height: 48px;
+//     color: #6B737A;
+
+//     position: relative;
+//     border: 1px solid $border-color;
+//     border-radius: 4px;
+//     display: flex;
+//     align-items: center;
+//     background: #fff;
+//     transition: border-color 0.2s;
+
+//     &:focus-within {
+//       border-color: $primary-color;
+//       border-width: 2px;
+      
+//       label { color: $primary-color; }
+//     }
+
+//     &.error { border-color: $error-red; }
+//   }
+
+//   input, select {
+//     font-family: 'Roboto', sans-serif !important;
+    
+//     width: 100%;
+//     height: 100%;
+//     font-size: 16px;
+//     line-height: 24px;
+//     color: #384048;
+//     padding: 16px 12px;
+
+  
+//     // padding: 20px 40px 6px 12px; // Right padding for icon
+//     border: none;
+//     background: transparent;
+//     outline: none;
+//     // font-size: 14px;
+//     z-index: 2;
+
+//     // Hide native date icon to show our custom SVG
+//     &::-webkit-calendar-picker-indicator {
+//       position: absolute;
+//       right: 8px;
+//       top: 0;
+//       bottom: 0;
+//       width: 30px;
+//       height: 100%;
+//       opacity: 0; // Keep it clickable but invisible
+//       cursor: pointer;
+//     }
+//   }
+
+//   label {
+//     position: absolute;
+//     left: 12px;
+//     top: 50%;
+//     transform: translateY(-50%);
+//     font-size: 12px;
+//     color: #5E6368;
+//     transition: all 0.2s ease;
+//     pointer-events: none;
+//     z-index: 1;
+//     font-family: 'Roboto', sans-serif !important;
+
+//     .asterisk {
+//       color: $error-red;
+//       font-weight: bold;
+//       margin-left: 2px;
+//     }
+//   }
+
+//   // Float Logic
+//   .input-container:focus-within label,
+//   input:not(:placeholder-shown) ~ label,
+//   .has-value label {
+//     top: 0;
+//     left: 8px;
+//     font-size: 11px;
+//     background: white;
+//     padding: 0 4px;
+//     transform: translateY(-50%);
+//     z-index: 3;
+//   }
+
+//   .icon-suffix {
+//     position: absolute;
+//     right: 12px;
+//     display: flex;
+//     align-items: center;
+//     color: #666;
+//     pointer-events: none; // Allows click to go through to date indicator
+//   }
+
+//   .error-msg {
+//     color: $error-red;
+//     font-size: 11px;
+//     padding: 4px 0 0 12px;
+//   }
+// }
+
+// Figma Design Tokens
+$font-roboto: 'Roboto', sans-serif;
+$text-main: #384048;
+$primary-purple: #7c4dff;
+$border-default: #7c858d;
+$error-red: #d32f2f;
+
+$border-default: #7c858d;
+$border-hover: #384048; // Darker border on hover
+$disabled-bg: #f5f5f5;
+$disabled-text: #9e9e9e;
+
+.input-wrapper {
+  position: relative;
+  margin-top: 10px; // Space for label to float
+  margin-bottom: 20px;
+  width: 100%;
+
+  .input-container {
+    position: relative;
+    border: 1px solid #6B737A;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    transition: all 0.2s ease;
+    width: 240px;
+    height: 48px;
+
+    // 1. HOVER STATE
+  &:hover:not(.disabled):not(.error) {
+    border-color: $border-hover;
+  }
+
+  // 2. FOCUS STATE (Active)
+  &:focus-within:not(.error) {
+    border-color: $primary-purple;
+    border-width: 2px;
+    
+    label {
+      color: $primary-purple !important;
+    }
+  }
+
+  // 3. ERROR STATE
+  &.error {
+    border-color: $error-red;
+    border-width: 1px; // Usually 1px in Figma unless focused
+
+    label {
+      color: $error-red !important;
+    }
+    
+    &:focus-within {
+      border-width: 2px; // Error focused state
+    }
+  }
+
+    // &:focus-within {
+    //   border-color: $primary-purple;
+    //   border-width: 2px;
+      
+    //   label {
+    //     color: $primary-purple;
+    //   }
+    // }
+
+    // &.error {
+    //   border-color: $error-red;
+    // }
+  }
+
+  // Force Roboto on ALL input types
+  input, 
+  select, 
+  input[type="text"], 
+  input[type="password"], 
+  input[type="email"] {
+    font-family: $font-roboto !important;
+    font-size: 16px !important;
+    line-height: 24px !important;
+    font-weight: 400 !important; // Fixed: No quotes
+    color: $text-main !important;
+    
+    width: 100%;
+    height: 100%;
+    padding: 16px 12px;
+    border: none;
+    background: transparent;
+    outline: none;
+    z-index: 2;
+
+    &::-webkit-calendar-picker-indicator {
+      position: absolute;
+      right: 10px;
+      width: 25px;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+  }
+
+  label {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: $font-roboto !important;
+    font-size: 16px; // Standard size when inside
+    color: #5E6368;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    z-index: 1;
+    background: transparent;
+
+    .asterisk {
+      color: $error-red;
+      margin-left: 2px;
+    }
+  }
+
+  /** * FIXED FLOAT LOGIC
+   * 1. When focused
+   * 2. When the input has a placeholder that IS NOT shown (meaning user typed)
+   */
+  .input-container:focus-within label,
+  input:not(:placeholder-shown) ~ label {
+    font-family: $font-roboto !important;
+    font-weight: 400 !important;
+    line-height: 16px;
+    color: #5E6368;
+    font-size: 12px;
+    display: inline-block !important; // Helps the browser render font correctly
+
+    position: absolute;
+    top: 0;
+    left: 8px;
+    background: white; // This cuts the border line
+    padding: 0 4px;
+    transform: translateY(-50%);
+    z-index: 3;
+  }
+
+  .icon-suffix {
+    position: absolute;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    color: #5E6368;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .error-msg {
+    color: $error-red;
+    font-family: $font-roboto;
+    font-size: 12px;
+    padding: 4px 0 0 12px;
+  }
+}

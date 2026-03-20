@@ -1,0 +1,114 @@
+/* Design Tokens (from Figma) */
+$primary: #6366F1;
+$primary-hover: #4F46E5;
+$primary-focus: #4F46E5;
+$primary-active: #4338CA;
+$primary-disabled: #C4D1FF;
+
+$secondary: #F3F4F6;
+$secondary-hover: #E5E7EB;
+$secondary-focus: #E5E7EB;
+$secondary-active: #D1D5DB;
+$secondary-disabled: #F9FAFB;
+
+
+
+.btn-xs {
+  padding: 6px 16px;
+  height: 32px;
+  width: 110px;
+
+  font-size:14px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.btn-sm {
+  padding: 10px 16px;
+  height: 40px;
+  width: 110px;
+
+  font-size:14px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.btn-md {
+  padding: 12px 20px;
+  height: 48px;
+  width: 129px;
+
+  font-size:16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.btn-lg {
+  padding: 14px 24px;
+  height: 56px;
+  width: 148px;
+
+  font-size:18px;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+/* default btn state*/
+.btn {
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  border: none;
+  border-radius: sharp;
+}
+
+/* 🔹 Primary Filled */
+.btn-primary.btn-filled {
+  background-color: $primary;
+  color: white;
+
+  &:hover {
+    background-color: $primary-hover;
+  }
+
+  &:focus {
+    outline: 2px solid $primary-focus;
+  }
+
+  &:active {
+    background-color: $primary-active;
+  }
+
+  &:disabled {
+    background-color: $primary-disabled;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+}
+
+
+/* 🔹 Secondary Filled */
+.btn-secondary.btn-filled {
+  background-color: $secondary;
+  color: white;
+
+  &:hover {
+    background-color: $secondary-hover;
+  }
+
+  &:focus {
+    outline: 2px solid $secondary-focus;
+  }
+
+  &:active {
+    background-color: $secondary-active;
+  }
+
+  &:disabled {
+    background-color: $secondary-disabled;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+}
+
+
+
