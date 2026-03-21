@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Button,TextField } from 'ui-components';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,20 +13,9 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModu
 })
 export class AddEmployee {
 
-  // employeeForm!:FormGroup;
-  // employees:any;
-
-  // constructor(private fb:FormBuilder) {
-  //    this.employees = [
-  //     { id: 1, firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com' }
-  //   ];
-  // }
-
  empForm!: FormGroup;
- // Singapore Phone Regex: Starts with 6, 8, or 9 and has 8 digits total
-  readonly sgPhoneRegex = /^[689]\d{7}$/;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private router: Router) {}
 
 ngOnInit(): void {
     this.empForm = this.fb.group({
@@ -79,12 +69,18 @@ ngOnInit(): void {
     };
   }
 
-    onSubmit() {
+  goBack() {
+    this.router.navigate(['/employees']);
+  }
+
+  onSubmit() {
     if (this.empForm.valid) {
       console.log('Valid Form Submission:', this.empForm.value);
     } else {
       this.empForm.markAllAsTouched();
     }
   }
+
+
 
 }

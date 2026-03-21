@@ -1,69 +1,90 @@
-<div class="form-container">
-  <h2>Add Employee</h2>
+<div class="page-container">
 
-  <form [formGroup]="empForm" (ngSubmit)="onSubmit()" class="employee-grid">
-    
-    <lib-text-field
-      label="Input Text"
-      [control]="firstNameControl"
-      [isRequired]="true">
-    </lib-text-field>
+  <div class="form-card">
 
-    <lib-text-field
-      label="Last Name"
-      [control]="lastNameControl"
-      [isRequired]="true">
-    </lib-text-field>
+    <div class="form-header">
+      <lib-button 
+        label="← Back" variant="secondary" 
+        size="sm" type="button" styleType="filled"
+        (click)="goBack()">
+      </lib-button>
 
-    <lib-text-field
-      label="Email"
-      type="email"
-      [control]="emailControl"
-      [isRequired]="true">
-    </lib-text-field>
-
-    <lib-text-field
-      label="Phone Number"
-      type="text"
-      [control]="phoneControl"
-      [isRequired]="true">
-    </lib-text-field>
-
-    <div class="radio-group">
-      <label class="group-label">Gender *</label>
-      <div class="options">
-        <label><input type="radio" value="Male" formControlName="gender"> Male</label>
-        <label><input type="radio" value="Female" formControlName="gender"> Female</label>
-        <label><input type="radio" value="Other" formControlName="gender"> Other</label>
-      </div>
-      <small class="error" *ngIf="empForm.get('gender')?.touched && empForm.get('gender')?.invalid">
-        Gender is required
-      </small>
-    </div>&nbsp;&nbsp;
-
-    <lib-text-field
-      label="Date of Birth"
-      type="datepicker"
-      [control]="dobControl"
-      [isRequired]="true">
-    </lib-text-field>
-
-    <lib-text-field
-      label="Joined Date"
-      type="datepicker"
-      [control]="joinedDateControl"
-      [isRequired]="true">
-    </lib-text-field>
-
-    <div class="full-width error-msg" *ngIf="empForm.hasError('dateMismatch') && empForm.get('joinedDate')?.touched">
-      Joined Date must be after the Date of Birth.
+      <h2>Add Employee</h2>
     </div>
 
+    <div class="form-container">
 
-    <lib-button label="Save Emp" variant="primary" size='md' 
-        type="submit" styleType="filled"
-        [disabled]="empForm.invalid" (click)="onSubmit()">
-    </lib-button>
+      <form [formGroup]="empForm" (ngSubmit)="onSubmit()" class="employee-grid">
+        
+        <lib-text-field
+          label="First Name"
+          [control]="firstNameControl"
+          [isRequired]="true">
+        </lib-text-field>
 
-  </form>
+        <lib-text-field
+          label="Last Name"
+          [control]="lastNameControl"
+          [isRequired]="true">
+        </lib-text-field>
+
+        <lib-text-field
+          label="Email"
+          type="email"
+          [control]="emailControl"
+          [isRequired]="true">
+        </lib-text-field>
+
+        <lib-text-field
+          label="Phone Number"
+          type="text"
+          [control]="phoneControl"
+          [isRequired]="true">
+        </lib-text-field>
+
+        <lib-text-field
+          label="Date of Birth"
+          type="datepicker"
+          [control]="dobControl"
+          [isRequired]="true">
+        </lib-text-field>
+
+        <lib-text-field
+          label="Joined Date"
+          type="datepicker"
+          [control]="joinedDateControl"
+          [isRequired]="true">
+        </lib-text-field>
+
+        <div class="full-width error-msg" *ngIf="empForm.hasError('dateMismatch') && empForm.get('joinedDate')?.touched">
+          Joined Date must be after the Date of Birth.
+        </div>
+
+        <div class="radio-group">
+          <label class="group-label">Gender *</label>
+          <div class="options">
+            <label><input type="radio" value="Male" formControlName="gender"> Male</label>
+            <label><input type="radio" value="Female" formControlName="gender"> Female</label>
+          </div>
+          <small class="error" *ngIf="empForm.get('gender')?.touched && empForm.get('gender')?.invalid">
+            Gender is required
+          </small>
+        </div>
+
+        <lib-button 
+          label="Save Emp" 
+          variant="primary" 
+          size='md' 
+          type="submit" 
+          styleType="filled"
+          [disabled]="empForm.invalid" 
+          (click)="onSubmit()">
+        </lib-button>
+
+      </form>
+
+    </div>
+
+  </div>
+
 </div>

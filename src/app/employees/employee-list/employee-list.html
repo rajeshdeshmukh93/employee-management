@@ -1,43 +1,76 @@
+<div class="page-container">
 
-<lib-button
-  label="Add Emp"
-  variant="primary"
-  size='md'
-  type="button"
-  styleType="filled"
-  (click)="addEmployee()">
-  
-</lib-button>
+  <div class="card">
 
-<table>
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <h2>Employee List</h2>
 
-    <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Actions</th>
-    </tr>
+      <div class="top-actions">
+        <lib-button
+          label="Add Emp"
+          variant="primary"
+          size="md"
+          type="button"
+          styleType="filled"
+          (click)="addEmployee()">
+        </lib-button>
 
-    <tr *ngFor="let emp of employees">
+        <lib-button
+          label="Logout"
+          variant="secondary"
+          size="md"
+          type="button"
+          styleType="filled">
+        </lib-button>
+      </div>
+    </div>
 
-        <td>{{emp.firstName}}</td>
-        <td>{{emp.lastName}}</td>
-        <td>{{emp.email}}</td>
+    <!-- Table -->
+    <table class="emp-table">
 
-        <td>
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th class="action-col">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let emp of employees">
+
+          <td>{{emp.firstName}}</td>
+          <td>{{emp.lastName}}</td>
+          <td>{{emp.email}}</td>
+
+          <td class="actions">
 
             <lib-button 
-                label="Edit" variant="primary" 
-                size='sm'  styleType="filled" type="submit" 
-                (click)="editEmployee(emp.id)">
-            </lib-button>&nbsp;
-
-            <lib-button label="Delete" variant="primary" 
-                size='sm' styleType="filled" type="submit">
+              label="Edit"
+              variant="primary"
+              size="sm"
+              styleType="filled"
+              type="button"
+              (click)="editEmployee(emp.id)">
             </lib-button>
 
-        </td>
+            <lib-button 
+              label="Delete"
+              variant="primary"
+              size="sm"
+              styleType="filled"
+              type="button">
+            </lib-button>
 
-    </tr>
+          </td>
 
-</table>
+        </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>

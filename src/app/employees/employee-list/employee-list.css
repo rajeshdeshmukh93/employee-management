@@ -1,0 +1,77 @@
+/* Page background */
+.page-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+}
+
+/* Card container */
+.card {
+  width: 900px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 25px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* Top bar */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.top-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Table */
+.emp-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Header */
+.emp-table th {
+  text-align: left;
+  padding: 12px;
+  background: #f4f6fb;
+  border-bottom: 2px solid #ddd;
+}
+
+/* Rows */
+.emp-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+/* Hover */
+.emp-table tr:hover {
+  background: #f9fafb;
+}
+
+/* Actions column */
+.action-col {
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Button full width fix if needed */
+lib-button {
+  display: inline-block;
+}
+
+/* Card hover effect */
+.card:hover {
+  transform: translateY(-4px);
+  transition: 0.3s ease;
+}

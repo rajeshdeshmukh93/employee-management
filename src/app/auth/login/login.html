@@ -1,25 +1,24 @@
-<form [formGroup]="loginForm">
+<div class="login-container">
+  <form [formGroup]="loginForm" class="login-card">
 
-    <lib-text-field
-      label="Email"
-      type="email"
-      [control]="emailControl"
+    <lib-text-field 
+      label="Email" type="email" 
+      [control]="emailControl" placeholder="Enter Email"
       [isRequired]="true">
     </lib-text-field>
 
     <lib-text-field 
-        label="Password" 
-        type="password"
-        [control]="passwordControl" 
-        placeholder="Enter password"
-        [isRequired]="true">
+      label="Password" type="password" 
+      [control]="passwordControl" placeholder="Enter password"
+      [isRequired]="true">
     </lib-text-field>
 
-    <lib-button label="Login" variant="primary" size='md' 
-        type="submit" styleType="filled"
-        [disabled]="loginForm.invalid" (click)="onLogin()">
+    <lib-button 
+      label="Login" variant="primary" 
+      size='md' type="submit" styleType="filled"
+      [disabled]="loginForm.invalid" 
+      (click)="onLogin()">
     </lib-button>
-    
-</form>
 
-
+  </form>
+</div>
