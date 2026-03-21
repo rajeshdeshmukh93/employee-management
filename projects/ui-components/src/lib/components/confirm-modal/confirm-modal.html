@@ -1,0 +1,10 @@
+<div class="modal-overlay" *ngIf="isOpen">
+  <div class="modal-card">
+    <h3>{{ title }}</h3>
+    <p>{{ message }}</p>
+    <div class="modal-actions">
+      <lib-button label="Cancel" variant="secondary" size="md" styleType="filled" (click)="onCancel()"></lib-button>
+      <lib-button label="Confirm" variant="primary" size="md" styleType="filled" (click)="onConfirm()"></lib-button>
+    </div>
+  </div>
+</div>

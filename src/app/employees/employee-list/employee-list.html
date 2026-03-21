@@ -21,7 +21,7 @@
           variant="secondary"
           size="md"
           type="button"
-          styleType="filled">
+          styleType="filled" (click)="openModal('logout')">
         </lib-button>
       </div>
     </div>
@@ -61,7 +61,7 @@
               variant="primary"
               size="sm"
               styleType="filled"
-              type="button">
+              type="button" (click)="openModal('delete', emp.id)">
             </lib-button>
 
           </td>
@@ -70,6 +70,15 @@
       </tbody>
 
     </table>
+
+    <!-- Reusable Confirm Modal -->
+  <lib-confirm-modal
+    [isOpen]="showModal"
+    [title]="modalTitle"
+    [message]="modalMessage"
+    (confirm)="handleConfirm()"
+    (cancel)="handleCancel()">
+  </lib-confirm-modal>
 
   </div>
 
