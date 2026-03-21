@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Employee } from '../../services/employee';
+import { EmployeeService } from '../../services/employee/employee';
 import { CommonModule } from '@angular/common';
 import { Button,TextField } from 'ui-components';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';

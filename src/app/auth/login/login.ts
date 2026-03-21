@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Button,TextField } from 'ui-components';
+import { User } from '../../models/User';
+import { LoginService } from '../../services/login/login';
 
 @Component({
   selector: 'app-login',
@@ -13,9 +15,10 @@ import { Button,TextField } from 'ui-components';
 })
 export class Login implements OnInit{
 
+  private apiUrl = 'http://localhost:3000/users';
   loginForm!:FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(private fb: FormBuilder, private router: Router, private loginService: LoginService) {}
 
   get emailControl(): FormControl {
     return this.loginForm.get('email') as FormControl;
@@ -25,12 +28,8 @@ export class Login implements OnInit{
     return this.loginForm.get('password') as FormControl;
   }
 
-  get dobControl(): FormControl {
-    return this.loginForm.get('dob') as FormControl;
-  }
 
   ngOnInit(): void {
-    // this.loginForm.reset();
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [
@@ -44,15 +43,15 @@ export class Login implements OnInit{
   onLogin() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      // Mock Login Logic
-      if (email === 'admin@tcs.com' && password === 'Password123') {
-        localStorage.setItem('session', 'active'); // Create session
-        this.router.navigate(['/employees']);
+      this.loginService.login(email, password!).subscribe(user => {
+      if(user) {
+        const { password, ...safeUser } = user;
+        this.loginService.setUser(safeUser as any);
+        this.router.navigate(['/employees']); // navigate to employee list
       } else {
-        // this.loginErrorMessage = 'Invalid email or password.';
+        alert('Invalid email or password.');
       }
-      this.router.navigate(['/employees']);
-
+    });
     }
   }
 

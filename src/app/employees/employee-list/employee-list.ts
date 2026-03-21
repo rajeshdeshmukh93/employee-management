@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Button, TextField } from 'ui-components';
 import { Router } from '@angular/router';
 import { ConfirmModal } from 'ui-components';
+import { LoginService } from '../../services/login/login';
 @Component({
   selector: 'app-employee-list',
   imports: [Button, CommonModule, ConfirmModal],
@@ -18,7 +19,7 @@ export class EmployeeList {
   selectedEmpId: number | null = null; // track which employee for delete
 
   employees: any;
-  constructor(private router: Router) {
+  constructor(private router: Router, private loginService: LoginService) {
     this.employees = [
       { id: 1, firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com' }
     ];
@@ -66,8 +67,7 @@ export class EmployeeList {
   }
 
   logout() {
-    console.log('Logged out');
-    this.router.navigate(['/login']); // navigate to login page
+    this.loginService.logout();
   }
 
   deleteEmployee(empId: number) {
