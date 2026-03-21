@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   selector: 'app-edit-employee',
   imports: [CommonModule, TextField, Button, ReactiveFormsModule],
   templateUrl: './edit-employee.html',
-  styleUrl: './edit-employee.css',
+  styleUrl: './edit-employee.scss',
 })
 export class EditEmployee {
   empId: any;

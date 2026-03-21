@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   selector: 'app-employee-list',
   imports: [Button, CommonModule],
   templateUrl: './employee-list.html',
-  styleUrl: './employee-list.css',
+  styleUrl: './employee-list.scss',
 })
 export class EmployeeList {
   employees:any;
