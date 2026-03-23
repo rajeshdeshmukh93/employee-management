@@ -61,6 +61,10 @@ $secondary-disabled: #F9FAFB;
   border-radius: 6px;
 }
 
+:host(.full-width) .btn {
+  width: 100%;
+}
+
 /* 🔹 Primary Filled */
 .btn-primary.btn-filled {
   background-color: $primary;

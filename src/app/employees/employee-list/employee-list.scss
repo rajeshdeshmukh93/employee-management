@@ -5,16 +5,20 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 40px 20px;
+  padding: 20px; /* Reduced padding for mobile comfort */
 }
 
-/* Card container */
+/* Card container - The Responsive Fix */
 .card {
-  width: 900px;
+  width: 100%;       
+  max-width: 1000px;     /* Stop growing at 1000px on desktop */
+  min-width: 0;          /* REMOVED the 900px floor */
   background: #fff;
   border-radius: 12px;
-  padding: 20px 25px;
+  padding: 20px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  box-sizing: border-box; 
+  overflow: hidden;      /* Keeps children inside rounded corners */
 }
 
 /* Top bar */
@@ -23,55 +27,70 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  flex-wrap: wrap;       /* Allows wrapping on very small screens */
+  gap: 10px;
 }
 
-.top-actions {
-  display: flex;
-  gap: 10px;
+/* Table Wrapper - This creates the inner scroll */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;      /* Enables horizontal swipe for the table */
+  -webkit-overflow-scrolling: touch; 
+  border: 1px solid #eee;
+  border-radius: 8px;
 }
 
 /* Table */
 .emp-table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 700px;      /* Forces table to be wide enough to be readable */
 }
 
-/* Header */
-.emp-table th {
-  text-align: left;
-  padding: 12px;
-  background: #f4f6fb;
-  border-bottom: 2px solid #ddd;
-}
-
-/* Rows */
+.emp-table th,
 .emp-table td {
   padding: 12px;
+  text-align: left;
   border-bottom: 1px solid #eee;
+  white-space: nowrap;   /* Keeps data on one line */
 }
 
-/* Hover */
-.emp-table tr:hover {
-  background: #f9fafb;
+.emp-table th {
+  background: #f4f6fb;
+  font-weight: bold;
 }
 
 /* Actions column */
-.action-col {
-  text-align: center;
-}
-
 .actions {
   display: flex;
   gap: 8px;
 }
 
-/* Button full width fix if needed */
-lib-button {
-  display: inline-block;
+/* Responsive Breakpoints */
+@media (max-width: 768px) {
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .top-actions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+  }
 }
 
-/* Card hover effect */
-.card:hover {
-  transform: translateY(-4px);
-  transition: 0.3s ease;
+@media (max-width: 480px) {
+  .page-container {
+    padding: 10px;
+  }
+  
+  .card {
+    padding: 15px;
+  }
+  
+  h2 {
+    font-size: 1.2rem;
+  }
 }
