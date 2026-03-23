@@ -5,6 +5,10 @@ import { Button, TextField } from 'ui-components';
 import { Router } from '@angular/router';
 import { ConfirmModal } from 'ui-components';
 import { LoginService } from '../../services/login/login';
+import { EmployeeService } from '../../services/employee/employee';
+import { Employee } from '../../models/Employee';
+import { ChangeDetectorRef } from '@angular/core';
+
 @Component({
   selector: 'app-employee-list',
   imports: [Button, CommonModule, ConfirmModal],
@@ -18,22 +22,42 @@ export class EmployeeList {
   modalAction: 'logout' | 'delete' | null = null;
   selectedEmpId: number | null = null; // track which employee for delete
 
-  employees: any;
-  constructor(private router: Router, private loginService: LoginService) {
-    this.employees = [
-      { id: 1, firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com' }
-    ];
+  employees:  Employee[] = [];
+  constructor(
+    private router: Router, private loginService: LoginService, 
+    private employeeService: EmployeeService, private cdr: ChangeDetectorRef) {
+   
+  }
+
+  ngOnInit(): void {
+    this.loadEmployees();
+  }
+
+  trackById(index: number, item: any) {
+    return item.id;
+  }
+
+  loadEmployees() {
+    this.employeeService.getEmployees().subscribe({
+      next: (res:  Employee[]) => {
+        this.employees = res;
+        this.cdr.detectChanges();  
+      },
+      error: (err) => {
+        console.error('Error fetching employees', err);
+      }
+    });
   }
 
   addEmployee() {
     this.router.navigate(['/employees/add']);
   }
 
-  editEmployee(id: number) {
-    this.router.navigate(['/employees/edit', id]);
+  editEmployee(emp: Employee) {
+    this.router.navigate(['/employees/edit', emp.id]);
   }
 
-  openModal(action: 'logout' | 'delete', empId?: number) {
+  openModal(action: 'logout' | 'delete', emp?: Employee) {
     this.modalAction = action;
     this.showModal = true;
 
@@ -43,7 +67,7 @@ export class EmployeeList {
     } else if (action === 'delete') {
       this.modalTitle = 'Delete Employee';
       this.modalMessage = 'Are you sure you want to delete this employee?';
-      if (empId) this.selectedEmpId = empId;
+      if (emp && emp.id) this.selectedEmpId = emp.id;
     }
   }
 
@@ -71,7 +95,15 @@ export class EmployeeList {
   }
 
   deleteEmployee(empId: number) {
-    console.log('Deleted employee:', empId);
-    // call API to delete employee here
+    let id = empId.toString();
+    this.employeeService.deleteEmployee(id).subscribe({
+      next: () => {
+        console.log('Deleted successfully');
+        this.loadEmployees();
+      },
+      error: (err) => {
+        console.error('Delete failed', err);
+      }
+    });
   }
 }

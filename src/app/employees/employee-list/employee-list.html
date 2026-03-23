@@ -34,17 +34,24 @@
           <th>First Name</th>
           <th>Last Name</th>
           <th>Email</th>
+          <th>Phone</th>
+          <th>Gender</th>
+          <th>Date of Birth</th>
+          <th>Joined Date</th>
           <th class="action-col">Actions</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr *ngFor="let emp of employees">
-
+        <tr *ngFor="let emp of employees; trackBy: trackById">
+          
           <td>{{emp.firstName}}</td>
           <td>{{emp.lastName}}</td>
           <td>{{emp.email}}</td>
-
+          <td>{{emp.phone}}</td>
+          <td>{{emp.gender}}</td>
+          <td>{{emp.dob}}</td>
+          <td>{{emp.joinedDate}}</td>
           <td class="actions">
 
             <lib-button 
@@ -53,17 +60,15 @@
               size="sm"
               styleType="filled"
               type="button"
-              (click)="editEmployee(emp.id)">
+              (click)="editEmployee(emp)">
             </lib-button>
-
             <lib-button 
               label="Delete"
               variant="primary"
               size="sm"
               styleType="filled"
-              type="button" (click)="openModal('delete', emp.id)">
+              type="button" (click)="openModal('delete', emp)">
             </lib-button>
-
           </td>
 
         </tr>

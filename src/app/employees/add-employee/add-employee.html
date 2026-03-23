@@ -44,14 +44,14 @@
 
         <lib-text-field
           label="Date of Birth"
-          type="datepicker"
+          variant="datepicker"
           [control]="dobControl"
           [isRequired]="true">
         </lib-text-field>
 
         <lib-text-field
           label="Joined Date"
-          type="datepicker"
+          variant="datepicker"
           [control]="joinedDateControl"
           [isRequired]="true">
         </lib-text-field>
@@ -77,8 +77,7 @@
           size='md' 
           type="submit" 
           styleType="filled"
-          [disabled]="empForm.invalid" 
-          (click)="onSubmit()">
+          [disabled]="empForm.invalid">
         </lib-button>
 
       </form>

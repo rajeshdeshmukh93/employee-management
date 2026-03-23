@@ -13,8 +13,7 @@
     </div>
 
     <div class="form-container">
-        <!-- (ngSubmit)="onSubmit()" -->
-      <form [formGroup]="empForm"  class="employee-grid">
+      <form [formGroup]="empForm"  (ngSubmit)="onUpdate()" class="employee-grid">
         
         <lib-text-field
           label="First Name"
@@ -44,14 +43,14 @@
 
         <lib-text-field
           label="Date of Birth"
-          type="datepicker"
+          variant="datepicker"
           [control]="dobControl"
           [isRequired]="true">
         </lib-text-field>
 
         <lib-text-field
           label="Joined Date"
-          type="datepicker"
+          variant="datepicker"
           [control]="joinedDateControl"
           [isRequired]="true">
         </lib-text-field>
@@ -71,7 +70,6 @@
           </small>
         </div>
 
-        <!-- (click)="onSubmit()" -->
         <lib-button 
           label="Update" 
           variant="primary" 

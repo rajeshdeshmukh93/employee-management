@@ -19,11 +19,11 @@ export class EditEmployee {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private employeeService: EmployeeService
   ) {}
 
   ngOnInit() {
-      // 1. Initialize form
   this.empForm = this.fb.group({
     firstName: [''],
     lastName: [''],
@@ -40,36 +40,43 @@ export class EditEmployee {
     }
   }
 
-  // Mock / API call
   loadEmployeeData(id: any) {
-    // Replace this with API call
-    const emp = {
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'john@gmail.com',
-      phone: '9876543210',
-      gender: 'Female',
-      dob: '1995-01-01',
-      joinedDate: '2022-01-01'
-    };
+    this.employeeService.getEmployeeById(id).subscribe({
+      next: (res) => {
+        console.log('Employee Data:', res);
 
-    this.empForm.setValue(emp);
+        this.empForm.patchValue(res);
+      },
+      error: (err) => {
+        console.error('Error fetching employee', err);
+      }
+    });
   }
 
   onUpdate() {
-    if (this.empForm.valid) {
-      console.log('Updated Employee:', this.empForm.value);
-
-      // Navigate back after update
-      this.router.navigate(['/employees']);
+    if (this.empForm.invalid) {
+      this.empForm.markAllAsTouched();
+      return;
     }
+
+    const payload = this.empForm.value;
+
+    this.employeeService.updateEmployee(this.empId, payload).subscribe({
+      next: (res) => {
+        console.log('Employee Updated Successfully', res);
+
+        this.router.navigate(['/employees']);
+      },
+      error: (err) => {
+        console.error('Update failed', err);
+      }
+    });
   }
 
   goBack() {
     this.router.navigate(['/employees']);
   }
 
-  // EditEmployeeComponent.ts
   get firstNameControl(): FormControl {
     return this.empForm.get('firstName') as FormControl;
   }

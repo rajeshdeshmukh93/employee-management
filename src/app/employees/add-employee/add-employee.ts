@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Button,TextField } from 'ui-components';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { EmployeeService } from '../../services/employee/employee';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class AddEmployee {
 
  empForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(private fb: FormBuilder, private router: Router, private employeeService: EmployeeService) {}
 
 ngOnInit(): void {
     this.empForm = this.fb.group({
@@ -74,11 +75,28 @@ ngOnInit(): void {
   }
 
   onSubmit() {
-    if (this.empForm.valid) {
-      console.log('Valid Form Submission:', this.empForm.value);
-    } else {
+    if (this.empForm.invalid) {
       this.empForm.markAllAsTouched();
+      return;
     }
+
+    // const payload = this.empForm.value;
+    const payload = {
+      id: Date.now(),
+      ...this.empForm.value
+    };
+
+    this.employeeService.addEmployee(payload).subscribe({
+      next: (res) => {
+        console.log('Employee Added Successfully', res);
+
+        // Navigate back to list
+        this.router.navigate(['/employees']);
+      },
+      error: (err) => {
+        console.error('Error adding employee', err);
+      }
+    })
   }
 
 
