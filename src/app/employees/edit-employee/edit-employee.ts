@@ -24,20 +24,31 @@ export class EditEmployee {
   ) {}
 
   ngOnInit() {
-  this.empForm = this.fb.group({
-    firstName: [''],
-    lastName: [''],
-    email: [''],
-    phone: [''],
-    gender: [''],
-    dob: [''],
-    joinedDate: ['']
-  });
+    this.empForm = this.fb.group({
+      firstName: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(10)]],
+      lastName: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(10)]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern(/^[89][0-9]{7}$/)]],
+      gender: ['', Validators.required],
+      dob: ['', Validators.required],
+      joinedDate: ['', Validators.required]
+    }, { validators: this.dateLessThan('dob', 'joinedDate') });
     this.empId = this.route.snapshot.paramMap.get('id');
 
     if (this.empId) {
       this.loadEmployeeData(this.empId);
     }
+  }
+
+  dateLessThan(from: string, to: string) {
+    return (group: AbstractControl): ValidationErrors | null => {
+      const f = group.get(from)?.value;
+      const t = group.get(to)?.value;
+      if (f && t && new Date(t) <= new Date(f)) {
+        return { dateMismatch: true };
+      }
+      return null;
+    };
   }
 
   loadEmployeeData(id: any) {
