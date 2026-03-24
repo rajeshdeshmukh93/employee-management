@@ -20,12 +20,6 @@ export class TextField {
   @Input() isRequired: boolean = false;
 
   ngOnChanges() {
-    // console.log('TextField input changed:', {
-    //   label: this.label,
-    //   type: this.type,
-    //   placeholder: this.placeholder,
-    //   control: this.control,
-    //   options: this.options
-    // });
+   
   }
 }

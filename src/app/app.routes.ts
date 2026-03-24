@@ -4,6 +4,7 @@ import { EmployeeList } from './employees/employee-list/employee-list';
 import { EditEmployee } from './employees/edit-employee/edit-employee';
 import { Login } from './auth/login/login';
 import { authGuard } from '../../src/app/guards/auth-guard';
+import { unsavedGuard } from '../../src/app/guards/unsaved-guard';
 
 export const routes: Routes = [
 
@@ -20,20 +21,35 @@ export const routes: Routes = [
 
   {
     path: 'employees',
-    component: EmployeeList,
-     canActivate: [authGuard]
-  },
-
-  {
-    path: 'employees/add',
-    component: AddEmployee,
-     canActivate: [authGuard]
-  },
-
-  {
-    path: 'employees/edit/:id',
-    component: EditEmployee,
-    canActivate: [authGuard]
+    // component: EmployeeList,
+    canActivate: [authGuard],
+    children: [
+      {
+        path: '',
+        component: EmployeeList
+      },
+      {
+        path: 'add',
+        component: AddEmployee
+      },
+      {
+        path: 'edit/:id',
+        component: EditEmployee,
+        canDeactivate: [unsavedGuard]  
+      }
+    ]
   }
+
+  // {
+  //   path: 'employees/add',
+  //   component: AddEmployee,
+  //    canActivate: [authGuard]
+  // },
+
+  // {
+  //   path: 'employees/edit/:id',
+  //   component: EditEmployee,
+  //   canActivate: [authGuard]
+  // }
 
 ];

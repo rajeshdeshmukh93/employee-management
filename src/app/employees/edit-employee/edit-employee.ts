@@ -2,19 +2,25 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EmployeeService } from '../../services/employee/employee';
 import { CommonModule } from '@angular/common';
-import { Button,TextField } from 'ui-components';
+import { Button,ConfirmModal,TextField } from 'ui-components';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-employee',
-  imports: [CommonModule, TextField, Button, ReactiveFormsModule],
+  imports: [CommonModule, TextField, Button, ReactiveFormsModule, ConfirmModal],
   templateUrl: './edit-employee.html',
   styleUrl: './edit-employee.scss',
 })
 export class EditEmployee {
   empId: any;
   empForm!:FormGroup;
+
+  showModal = false;
+  pendingNavigation!: (result: boolean) => void;
+  isSaving = false;
+  modalTitle = 'Unsaved Changes';
+  modalMessage = 'You have unsaved changes. Are you sure you want to leave?';
 
   constructor(
     private route: ActivatedRoute,
@@ -54,9 +60,9 @@ export class EditEmployee {
   loadEmployeeData(id: any) {
     this.employeeService.getEmployeeById(id).subscribe({
       next: (res) => {
-        console.log('Employee Data:', res);
 
         this.empForm.patchValue(res);
+        this.empForm.markAsPristine();
       },
       error: (err) => {
         console.error('Error fetching employee', err);
@@ -69,16 +75,18 @@ export class EditEmployee {
       this.empForm.markAllAsTouched();
       return;
     }
-
+    this.isSaving = true;
     const payload = this.empForm.value;
 
     this.employeeService.updateEmployee(this.empId, payload).subscribe({
       next: (res) => {
         console.log('Employee Updated Successfully', res);
-
+        this.isSaving = false;
+        this.empForm.markAsPristine(); 
         this.router.navigate(['/employees']);
       },
       error: (err) => {
+        this.isSaving = false;
         console.error('Update failed', err);
       }
     });
@@ -114,5 +122,28 @@ export class EditEmployee {
 
   get joinedDateControl(): FormControl {
     return this.empForm.get('joinedDate') as FormControl;
+  }
+
+  canDeactivate(): Promise<boolean> | boolean {
+    if (!this.empForm || !this.empForm.dirty || this.isSaving) {
+      return true; // allow navigation if form not dirty or saving
+    }
+
+    // Show modal
+    this.showModal = true;
+
+    return new Promise((resolve) => {
+      this.pendingNavigation = resolve; // will be called on confirm/cancel
+    });
+  }
+
+  handleConfirm() {
+    this.showModal = false;
+    if (this.pendingNavigation) this.pendingNavigation(true); // allow navigation
+  }
+
+  handleCancel() {
+    this.showModal = false;
+    if (this.pendingNavigation) this.pendingNavigation(false); // stay on page
   }
 }

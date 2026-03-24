@@ -87,3 +87,11 @@
   </div>
 
 </div>
+
+<lib-confirm-modal
+  [isOpen]="showModal"
+  [title]="modalTitle"
+  [message]="modalMessage"
+  (confirm)="handleConfirm()"
+  (cancel)="handleCancel()">
+</lib-confirm-modal>
