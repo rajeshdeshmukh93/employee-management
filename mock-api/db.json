@@ -1,24 +1,14 @@
 {
   "employees": [
     {
-      "firstName": "Rajesh123",
+      "firstName": "Rajesh",
       "lastName": "Deshmukh",
-      "email": "rsddhj@gmail.com",
+      "email": "rajesh@gmail.com",
       "phone": "87879799",
       "gender": "Male",
-      "dob": "2026-03-19",
-      "joinedDate": "2026-03-27",
-      "id": "iAdgcIL7suk"
-    },
-    {
-      "firstName": "vija",
-      "lastName": "Deshmukh",
-      "email": "principal@gmail.com",
-      "phone": "88765555",
-      "gender": "Male",
-      "dob": "2026-03-19",
-      "joinedDate": "2026-03-27",
-      "id": "Zj6QBouOWvc"
+      "dob": "2026-03-17",
+      "joinedDate": "2026-04-04",
+      "id": "BXLG2_cTR6U"
     }
   ],
   "users": [

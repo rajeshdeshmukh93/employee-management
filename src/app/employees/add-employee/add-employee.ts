@@ -15,6 +15,8 @@ import { EmployeeService } from '../../services/employee/employee';
 export class AddEmployee {
 
  empForm!: FormGroup;
+ errorMessage: string = '';
+
 
   constructor(private fb: FormBuilder, private router: Router, private employeeService: EmployeeService) {}
 
@@ -94,11 +96,18 @@ ngOnInit(): void {
         this.router.navigate(['/employees']);
       },
       error: (err) => {
-        console.error('Error adding employee', err);
+        this.showError('Failed to add employee. Please try again.');
       }
     })
   }
 
+  showError(msg: string) {
+    this.errorMessage = msg;
+
+    setTimeout(() => {
+      this.errorMessage = '';
+    }, 3000);
+  }
 
 
 }

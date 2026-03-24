@@ -22,6 +22,7 @@ export class EditEmployee {
   modalTitle = 'Unsaved Changes';
   modalMessage = 'You have unsaved changes. Are you sure you want to leave?';
 
+  errorMessage: string = '';
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -87,7 +88,7 @@ export class EditEmployee {
       },
       error: (err) => {
         this.isSaving = false;
-        console.error('Update failed', err);
+        this.showError('Failed to update employee. Please try again.');
       }
     });
   }
@@ -145,5 +146,13 @@ export class EditEmployee {
   handleCancel() {
     this.showModal = false;
     if (this.pendingNavigation) this.pendingNavigation(false); // stay on page
+  }
+
+  showError(msg: string) {
+    this.errorMessage = msg;
+
+    setTimeout(() => {
+      this.errorMessage = '';
+    }, 3000);
   }
 }

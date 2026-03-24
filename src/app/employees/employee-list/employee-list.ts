@@ -21,7 +21,7 @@ export class EmployeeList {
   modalMessage = '';
   modalAction: 'logout' | 'delete' | null = null;
   selectedEmpId: number | null = null; // track which employee for delete
-
+  errorMessage: string = '';
   employees:  Employee[] = [];
   constructor(
     private router: Router, private loginService: LoginService, 
@@ -41,10 +41,15 @@ export class EmployeeList {
     this.employeeService.getEmployees().subscribe({
       next: (res:  Employee[]) => {
         this.employees = res;
-        this.cdr.detectChanges();  
+        this.cdr.detectChanges();
+        if (!res || res.length === 0) {
+          this.showError('No employees found.');
+        } else {
+          this.errorMessage = '';
+        }
       },
       error: (err) => {
-        console.error('Error fetching employees', err);
+        this.showError('Failed to load employees. Please try again.');
       }
     });
   }
@@ -100,10 +105,19 @@ export class EmployeeList {
       next: () => {
         console.log('Deleted successfully');
         this.loadEmployees();
+        this.showError('Employee deleted successfully.');
       },
       error: (err) => {
-        console.error('Delete failed', err);
+        this.showError('Failed to delete employee. Please try again.');
       }
     });
+  }
+
+  showError(msg: string) {
+    this.errorMessage = msg;
+
+    setTimeout(() => {
+      this.errorMessage = '';
+    }, 3000);
   }
 }

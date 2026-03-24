@@ -108,3 +108,7 @@
   (confirm)="handleConfirm()"
   (cancel)="handleCancel()">
 </lib-confirm-modal>
+
+<div class="error-banner" *ngIf="errorMessage">
+  {{ errorMessage }}
+</div>
