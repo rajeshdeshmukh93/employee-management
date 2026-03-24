@@ -59,8 +59,10 @@ lib-button {
 
 /* Error */
 .error-msg {
-  color: red;
-  font-size: 13px;
+  color: #E00000;
+  font-size: 12px;
+  line-height: 16px;
+  padding: 12px 16px;
 }
 
 .error-banner {

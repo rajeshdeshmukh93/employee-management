@@ -23,7 +23,7 @@
       <span class="asterisk" *ngIf="isRequired">*</span>
     </label>
 
-    <span class="icon-suffix">
+    <!-- <span class="icon-suffix">
       <ng-container [ngSwitch]="type">
         <svg *ngSwitchCase="'datepicker'" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -36,7 +36,7 @@
           <path d="M6 9l6 6 6-6"></path>
         </svg>
       </ng-container>
-    </span>
+    </span> -->
 
   </div>
 
@@ -45,8 +45,6 @@
   <span *ngIf="control.errors?.['minlength']">{{ label }} must be at least 6 chars</span>
   <span *ngIf="control.errors?.['maxlength']">{{ label }} cannot exceed 10 chars</span>
   <span *ngIf="control.errors?.['email']">Please enter a valid email address</span>
-  <!-- <span *ngIf="control.errors?.['pattern']">Invalid Singapore phone number</span> -->
-  <!-- <span *ngIf="control.errors?.['pattern']">Password must be a minimum of 8 characters</span> -->
   <ng-container *ngIf="control.errors?.['pattern']">
       <span *ngIf="label === 'Password'">
         Min 8 chars, 1 uppercase, 1 lowercase, 1 number
