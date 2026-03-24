@@ -52,6 +52,11 @@ lib-button {
   width: 100%;
 }
 
+.field-group {
+  display: flex;
+  flex-direction: column;
+}
+
 /* Error */
 .error-msg {
   color: red;
