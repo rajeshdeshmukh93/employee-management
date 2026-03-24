@@ -1,15 +1,32 @@
 /* Design Tokens (from Figma) */
+
+//primary-filled
 $primary: #6366F1;
 $primary-hover: #4F46E5;
 $primary-focus: #4F46E5;
 $primary-active: #4338CA;
 $primary-disabled: #C4D1FF;
 
+//primary-outline
+$primary-outline: #6366F1;
+$primary-outline-hover: #6366F1;
+$primary-outline-focus: #6366F1;
+$primary-outline-active: #6366F1;
+$primary-outline-disabled: #C4D1FF;
+
+//secondary-filled
 $secondary: #F3F4F6;
 $secondary-hover: #E5E7EB;
 $secondary-focus: #E5E7EB;
 $secondary-active: #D1D5DB;
 $secondary-disabled: #F9FAFB;
+
+//secondary-outline
+$secondary-outline: #374151;
+$secondary-outline-hover: #374151;
+$secondary-outline-focus: #374151;
+$secondary-outline-active: #374151;
+$secondary-outline-disabled: #D2D5D9;
 
 
 
@@ -58,7 +75,7 @@ $secondary-disabled: #F9FAFB;
   font-family: 'Inter', sans-serif;
   cursor: pointer;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 :host(.full-width) .btn {
@@ -89,6 +106,36 @@ $secondary-disabled: #F9FAFB;
   }
 }
 
+/* 🔹 Primary outline */
+.btn-primary.btn-outline {
+  background-color: #FFFFFF;
+  outline:1px solid $primary-outline-hover;
+  color:#6366F1;
+
+  &:hover {
+    background-color: #F3F3FE;
+    outline:1px solid $primary-outline-hover;
+    color:#6366F1;
+  }
+
+  &:focus {
+    background-color: #FFFFFF;
+    outline:1px solid $primary-outline-focus;
+    color:#6366F1;
+  }
+
+  &:active {
+    background-color: #E0E0FC;
+    outline:1px solid $primary-outline-active;
+    color:#6366F1; 
+  }
+
+  &:disabled {
+    background-color: #FFFFFF;
+    outline:1px solid $primary-outline-active;
+    color:$primary-outline-active;
+  }
+}
 
 /* 🔹 Secondary Filled */
 .btn-secondary.btn-filled {
@@ -111,6 +158,37 @@ $secondary-disabled: #F9FAFB;
     background-color: $secondary-disabled;
     cursor: not-allowed;
     opacity: 0.7;
+  }
+}
+
+/* 🔹 Secondary outline */
+.btn-secondary.btn-outline {
+  background-color: #FFFFFF;
+  outline:1px solid $secondary-outline;
+  color: $secondary-outline;
+
+  &:hover {
+    background-color: #F3F4F6;
+    outline:1px solid $secondary-outline-hover;
+    color: $secondary-outline-hover;  
+  }
+
+  &:focus {
+    background-color: #F3F4F6;
+    outline: 1px solid $secondary-outline-focus;
+    color:$secondary-outline-focus;
+  }
+
+  &:active {
+    background-color: #E5E7EB !important;
+    background-color: $secondary-outline-active;
+    color:$secondary-outline-active;
+  }
+
+  &:disabled {
+    background-color: #FFFFFF !important;
+    background-color: $secondary-outline-disabled;
+    color:$secondary-outline-disabled;
   }
 }
 
