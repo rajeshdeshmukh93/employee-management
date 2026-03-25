@@ -18,7 +18,7 @@ $primary-outline-disabled: #C4D1FF;
 $secondary: #F3F4F6;
 $secondary-hover: #E5E7EB;
 $secondary-focus: #E5E7EB;
-$secondary-active: #D1D5DB;
+$secondary-active: #374151;
 $secondary-disabled: #F9FAFB;
 
 //secondary-outline
@@ -85,7 +85,7 @@ $secondary-outline-disabled: #D2D5D9;
 /* 🔹 Primary Filled */
 .btn-primary.btn-filled {
   background-color: $primary;
-  color: white;
+  color: #FFFFFF;
 
   &:hover {
     background-color: $primary-hover;
@@ -139,25 +139,31 @@ $secondary-outline-disabled: #D2D5D9;
 
 /* 🔹 Secondary Filled */
 .btn-secondary.btn-filled {
-  background-color: $secondary;
-  color: white;
+  background-color: #F3F4F6;
+  color: #374151;
 
   &:hover {
-    background-color: $secondary-hover;
+    background-color: #E5E7EB;
+    color:#374151
   }
 
   &:focus {
-    outline: 2px solid $secondary-focus;
+    background-color: #E5E7EB;
+    color:#374151
+    // outline: 2px solid $secondary-focus;
   }
 
   &:active {
-    background-color: $secondary-active;
+    background-color: #D1D5DB;
+    color:#374151
+    // background-color: $secondary-active;
   }
 
   &:disabled {
-    background-color: $secondary-disabled;
-    cursor: not-allowed;
-    opacity: 0.7;
+    background-color: #F9FAFB;
+    color:#D2D5D9;
+    // cursor: not-allowed;
+    // opacity: 0.7;
   }
 }
 
