@@ -21,7 +21,7 @@
           variant="secondary"
           size="md"
           type="button"
-          styleType="filled" (click)="openModal('logout')">
+          styleType="outline" (click)="openModal('logout')">
         </lib-button>
       </div>
     </div>
@@ -59,13 +59,13 @@
               label="Edit"
               variant="primary"
               size="sm"
-              styleType="filled"
+              styleType="outline"
               type="button"
               (click)="editEmployee(emp)">
             </lib-button>
             <lib-button 
               label="Delete"
-              variant="primary"
+              variant="secondary"
               size="sm"
               styleType="filled"
               type="button" (click)="openModal('delete', emp)">
