@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Button,TextField } from 'ui-components';
@@ -17,8 +17,15 @@ export class Login implements OnInit{
 
   private apiUrl = 'http://localhost:3000/users';
   loginForm!:FormGroup;
+  errorMessage: string = '';
 
-  constructor(private fb: FormBuilder, private router: Router, private loginService: LoginService) {}
+
+  constructor(
+      private fb: FormBuilder, 
+      private router: Router, 
+      private loginService: LoginService,
+      private cdr: ChangeDetectorRef
+    ) {}
 
   get emailControl(): FormControl {
     return this.loginForm.get('email') as FormControl;
@@ -43,16 +50,32 @@ export class Login implements OnInit{
   onLogin() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      this.loginService.login(email, password!).subscribe(user => {
-      if(user) {
-        const { password, ...safeUser } = user;
-        this.loginService.setUser(safeUser as any);
-        this.router.navigate(['/employees']); // navigate to employee list
-      } else {
-        alert('Invalid email or password.');
+      this.loginService.login(email, password!).subscribe({
+      next: (user:any) => {
+        if(user){
+          this.loginService.setUser(user);
+          this.router.navigate(['/employees']);
+        }else{
+          this.showError('Invalid email or password.');
+        }
+               
+      },
+      error: (err) => {
+        this.showError('Login failed. Please check your credentials and try again.');
       }
     });
     }
+  }
+
+
+  showError(msg: string) {
+    this.errorMessage = msg;
+    this.cdr.markForCheck();
+
+    setTimeout(() => {
+      this.errorMessage = '';
+      this.cdr.markForCheck();
+    }, 3000);
   }
 
 }

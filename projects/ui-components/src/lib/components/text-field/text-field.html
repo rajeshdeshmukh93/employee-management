@@ -42,7 +42,7 @@
 
   <div class="error-msg" *ngIf="control.invalid && control.touched">
   <span *ngIf="control.errors?.['required']">{{ label }} is required</span>
-  <span *ngIf="control.errors?.['minlength']">{{ label }} must be at least 6 chars</span>
+  <span *ngIf="control.errors?.['minlength']">{{ label }} must be a</span>
   <span *ngIf="control.errors?.['maxlength']">{{ label }} cannot exceed 10 chars</span>
   <span *ngIf="control.errors?.['email']">Please enter a valid email address</span>
   <ng-container *ngIf="control.errors?.['pattern']">
