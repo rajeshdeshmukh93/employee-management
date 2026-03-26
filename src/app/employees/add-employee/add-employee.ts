@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Button,TextField } from 'ui-components';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
@@ -18,7 +18,12 @@ export class AddEmployee {
  errorMessage: string = '';
 
 
-  constructor(private fb: FormBuilder, private router: Router, private employeeService: EmployeeService) {}
+  constructor(
+    private fb: FormBuilder, 
+    private router: Router, 
+    private employeeService: EmployeeService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
 ngOnInit(): void {
     this.empForm = this.fb.group({
@@ -90,10 +95,8 @@ ngOnInit(): void {
 
     this.employeeService.addEmployee(payload).subscribe({
       next: (res) => {
-        console.log('Employee Added Successfully', res);
-
         // Navigate back to list
-        this.router.navigate(['/employees']);
+        this.router.navigate(['/employees']);       
       },
       error: (err) => {
         this.showError('Failed to add employee. Please try again.');
@@ -103,9 +106,11 @@ ngOnInit(): void {
 
   showError(msg: string) {
     this.errorMessage = msg;
+    this.cdr.markForCheck();
 
     setTimeout(() => {
       this.errorMessage = '';
+      this.cdr.markForCheck();
     }, 3000);
   }
 

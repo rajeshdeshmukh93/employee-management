@@ -103,7 +103,6 @@ export class EmployeeList {
     let id = empId.toString();
     this.employeeService.deleteEmployee(id).subscribe({
       next: () => {
-        console.log('Deleted successfully');
         this.loadEmployees();
         this.showError('Employee deleted successfully.');
       },
@@ -115,9 +114,11 @@ export class EmployeeList {
 
   showError(msg: string) {
     this.errorMessage = msg;
+    this.cdr.markForCheck();
 
     setTimeout(() => {
       this.errorMessage = '';
+      this.cdr.markForCheck();
     }, 3000);
   }
 }

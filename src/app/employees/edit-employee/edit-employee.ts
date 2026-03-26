@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EmployeeService } from '../../services/employee/employee';
 import { CommonModule } from '@angular/common';
@@ -27,7 +27,8 @@ export class EditEmployee {
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -150,9 +151,11 @@ export class EditEmployee {
 
   showError(msg: string) {
     this.errorMessage = msg;
+    this.cdr.markForCheck();
 
     setTimeout(() => {
       this.errorMessage = '';
+      this.cdr.markForCheck();
     }, 3000);
   }
 }
