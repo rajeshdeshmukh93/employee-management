@@ -8,7 +8,7 @@ import { EmployeeService } from '../../services/employee/employee';
 
 @Component({
   selector: 'app-add-employee',
-  imports: [ CommonModule, TextField, Button, ReactiveFormsModule],
+  imports: [ CommonModule, Button, TextField, ReactiveFormsModule],
   templateUrl: './add-employee.html',
   styleUrl: './add-employee.scss',
 })

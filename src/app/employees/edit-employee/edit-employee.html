@@ -15,7 +15,7 @@
     <div class="form-container">
       <form [formGroup]="empForm"  (ngSubmit)="onUpdate()" class="employee-grid">
         
-        <lib-text-field
+        <!-- <lib-text-field
           label="First Name"
           [control]="firstNameControl"
           [isRequired]="true">
@@ -48,16 +48,6 @@
           [isRequired]="true">
         </lib-text-field>
 
-        <!-- <lib-text-field
-          label="Joined Date"
-          type="datepicker"
-          [control]="joinedDateControl"
-          [isRequired]="true">
-        </lib-text-field>
-
-        <div class="error-msg" *ngIf="empForm.hasError('dateMismatch') && empForm.get('joinedDate')?.touched">
-          Joined Date must be after the Date of Birth.
-        </div> -->
 
         <div class="field-group">
           <lib-text-field 
@@ -70,7 +60,7 @@
           <div class="error-msg" *ngIf="empForm.hasError('dateMismatch') && empForm.get('joinedDate')?.touched">
             Joined Date must be after the Date of Birth.
           </div>
-        </div>
+        </div> -->
 
         <div class="radio-group">
           <label class="group-label">Gender *</label>

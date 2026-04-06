@@ -1,4 +1,4 @@
-<div class="login-container">
+<!-- <div class="login-container">
   <form [formGroup]="loginForm" class="login-card">
 
     <lib-text-field 
@@ -25,4 +25,29 @@
 
 <div class="error-banner" *ngIf="errorMessage">
   {{ errorMessage }}
-</div>
+</div> -->
+
+<!-- Using ControlValueAccessor  -->
+
+<form [formGroup]="loginForm">
+
+  <lib-text-field
+    label="Email"
+    type="email"
+    formControlName="email">
+  </lib-text-field>
+
+  <lib-text-field
+    label="Password"
+    type="password"
+    formControlName="password">
+  </lib-text-field>
+
+  <lib-button 
+      label="Login" variant="primary" 
+      size='md' type="submit" styleType="filled"
+      [disabled]="loginForm.invalid" 
+      (click)="onLogin()">
+  </lib-button>
+
+</form>

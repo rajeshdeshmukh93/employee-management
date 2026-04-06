@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-employee',
-  imports: [CommonModule, TextField, Button, ReactiveFormsModule, ConfirmModal],
+  imports: [CommonModule, Button, ReactiveFormsModule, ConfirmModal],
   templateUrl: './edit-employee.html',
   styleUrl: './edit-employee.scss',
 })
